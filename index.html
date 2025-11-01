@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Volumen de Paralelepípedo 3D | Herramienta Pro</title>
+    <style>
+        /* Nuevo estilo para un diseño centrado y pastel */
+        body { 
+            font-family: 'Georgia', serif; /* Nueva fuente */
+            margin: 0; 
+            padding: 40px 20px; 
+            background-color: #e0f7fa; /* Fondo Celeste Pastel */
+            color: #2c3e50; /* Color de texto oscuro */
+            text-align: center; /* Centrar todo el contenido */
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 15px; /* Bordes más suaves */
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            text-align: left; /* Volver a alinear el contenido interno a la izquierda */
+        }
+        h1 { 
+            color: #00838f; /* Tono de azul más suave */
+            border-bottom: 3px solid #4dd0e1; /* Línea más gruesa y suave */
+            padding-bottom: 15px;
+            text-align: center; /* Centrar título principal */
+        }
+        h2 { 
+            color: #00bcd4; 
+            margin-top: 30px; 
+            text-align: center; /* Centrar subtítulos */
+        }
+        h3 { 
+            color: #00838f; 
+            margin-top: 20px; 
+            text-align: center; /* Centrar subtítulos */
+        }
+        
+        .vector-input { 
+            margin-bottom: 20px; 
+            border: 2px solid #b2ebf2; /* Borde más visible */
+            padding: 20px; 
+            border-radius: 10px; 
+            background-color: #f4feff; /* Fondo muy claro para inputs */
+            transition: box-shadow 0.3s;
+            text-align: center; /* Centrar el contenido dentro de cada caja de vector */
+        }
+        .vector-input:hover {
+            box-shadow: 0 4px 15px rgba(0, 188, 212, 0.3);
+        }
+        
+        /* Centrar los labels y inputs dentro del contenedor */
+        .vector-input strong {
+            display: inline-block;
+            min-width: 100px;
+            margin-right: 15px;
+            font-weight: bold;
+            color: #00838f;
+        }
+
+        input[type="number"] { 
+            width: 80px; 
+            margin: 5px 10px; /* Espaciado ajustado */
+            padding: 10px;
+            border: 1px solid #80deea;
+            border-radius: 6px;
+            text-align: center;
+            font-family: 'Verdana', sans-serif; /* Fuente para inputs */
+        }
+        
+        button {
+            background-color: #00bcd4; /* Azul más vibrante */
+            color: white;
+            border: none;
+            padding: 15px 35px;
+            border-radius: 8px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+            font-family: 'Arial Black', sans-serif; /* Fuente para botón */
+            display: block; /* Ocupa todo el ancho */
+            width: 80%; /* Ancho del botón */
+            margin: 20px auto; /* Centrar el botón */
+        }
+        button:hover {
+            background-color: #0097a7;
+            transform: translateY(-2px);
+        }
+
+        .output-box { 
+            margin-top: 40px; 
+            padding: 30px; 
+            background-color: #e0f7fa; /* Fondo celeste pastel */
+            border-radius: 10px; 
+            border: 2px solid #b2ebf2;
+            text-align: center; /* Centrar el contenido del resultado */
+        }
+        .output-box strong { 
+            font-size: 1.2em; 
+            color: #2c3e50; 
+            font-family: 'Arial', sans-serif;
+        }
+        .output-box span {
+            font-weight: bold;
+            color: #e53935; /* Color rojo para destacar los valores */
+        }
+
+        .grafico-textual { 
+            font-family: 'Courier New', monospace; 
+            white-space: pre; 
+            background-color: #37474f; /* Gris oscuro para el fondo */
+            color: #cddc39; /* Verde lima para el texto */
+            padding: 20px; 
+            border-radius: 8px; 
+            margin: 20px auto; /* Centrar el bloque */
+            overflow-x: auto;
+            text-align: left; /* Mantener la alineación necesaria para la estructura */
+            max-width: 90%; /* Ancho limitado para centrar */
+        }
+
+        .cubo-textual {
+            font-family: 'Courier New', monospace; 
+            white-space: pre; 
+            background-color: #00838f; /* Azul teal para el fondo */
+            color: #ffeb3b; /* Amarillo brillante para el texto */
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px auto; /* Centrar el bloque */
+            line-height: 1.3; 
+            text-align: center; /* Centrar el dibujo en sí */
+            max-width: 90%;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>📐 Cálculo de Volumen de Paralelepípedo 3D</h1>
+
+    <h2>Entrada de Coordenadas (Punto y Vectores)</h2>
+    <div id="inputs">
+        <div class="vector-input">
+            <strong>P1 (Origen):</strong>
+            X: <input type="number" id="P1x" value="0">
+            Y: <input type="number" id="P1y" value="0">
+            Z: <input type="number" id="P1z" value="0">
+        </div>
+        <div class="vector-input">
+            <strong>P2 (Vector a):</strong>
+            X: <input type="number" id="P2x" value="3">
+            Y: <input type="number" id="P2y" value="0">
+            Z: <input type="number" id="P2z" value="0">
+        </div>
+        <div class="vector-input">
+            <strong>P3 (Vector b):</strong>
+            X: <input type="number" id="P3x" value="0">
+            Y: <input type="number" id="P3y" value="2">
+            Z: <input type="number" id="P3z" value="0">
+        </div>
+        <div class="vector-input">
+            <strong>P4 (Vector c):</strong>
+            X: <input type="number" id="P4x" value="0">
+            Y: <input type="number" id="P4y" value="0">
+            Z: <input type="number" id="P4z" value="4">
+        </div>
+    </div>
+    
+    <button onclick="calcularVolumen()">Calcular Volumen y Mostrar Gráficos</button>
+
+    <div class="output-box">
+        <h2>Resultados del Cálculo</h2>
+        <p><strong>Triple Producto Escalar (Determinante):</strong> <span id="resultado_det"></span></p>
+        <p><strong>VOLUMEN del Paralelepípedo:</strong> <span id="resultado_volumen"></span> unidades cúbicas</p>
+
+        <h3>Representación de Vectores (Paralelepípedo):</h3>
+        <pre id="grafico_textual" class="grafico-textual"></pre>
+
+        <h3>Simulación 3D (Perspectiva de Cubo):</h3>
+        <pre id="grafico_cubo" class="cubo-textual"></pre>
+    </div>
+</div>
+
+<script>
+    // ===============================================
+    // LÓGICA DE CÁLCULO (Sin Cambios)
+    // ===============================================
+
+    function calcularTripleProductoEscalar(a, b, c) {
+        // La fórmula del triple producto escalar: a · (b x c)
+        const termino1 = a[0] * (b[1] * c[2] - b[2] * c[1]);
+        const termino2 = a[1] * (b[0] * c[2] - b[2] * c[0]);
+        const termino3 = a[2] * (b[0] * c[1] - b[1] * c[0]);
+        return termino1 - termino2 + termino3; // Desarrollo del determinante 3x3
+    }
+
+    function obtenerPunto(prefix) {
+        const x = parseFloat(document.getElementById(prefix + 'x').value);
+        const y = parseFloat(document.getElementById(prefix + 'y').value);
+        const z = parseFloat(document.getElementById(prefix + 'z').value);
+        return { x, y, z };
+    }
+
+    function dibujarVerticesTextual(P1, P2, P3, P4, a, b, c) {
+        return `
+╔══════════════════════════════════════════════╗
+║ VÉRTICES Y VECTORES CREADOS                  ║
+╠══════════════════════════════════════════════╣
+║ Vértices:
+║ P1 (Origen): (${P1.x.toFixed(2)}, ${P1.y.toFixed(2)}, ${P1.z.toFixed(2)})
+║ P2:        (${P2.x.toFixed(2)}, ${P2.y.toFixed(2)}, ${P2.z.toFixed(2)})
+║ P3:        (${P3.x.toFixed(2)}, ${P3.y.toFixed(2)}, ${P3.z.toFixed(2)})
+║ P4:        (${P4.x.toFixed(2)}, ${P4.y.toFixed(2)}, ${P4.z.toFixed(2)})
+║
+║ Vectores (Aristas):
+║ Vector a: (${a[0].toFixed(2)}, ${a[1].toFixed(2)}, ${a[2].toFixed(2)})
+║ Vector b: (${b[0].toFixed(2)}, ${b[1].toFixed(2)}, ${b[2].toFixed(2)})
+║ Vector c: (${c[0].toFixed(2)}, ${c[1].toFixed(2)}, ${c[2].toFixed(2)})
+╚══════════════════════════════════════════════╝`;
+    }
+
+    // ===============================================
+    // LÓGICA DE DIBUJO 3D (Cubo en Perspectiva)
+    // ===============================================
+
+    function dibujarCuboPerspectiva() {
+        // Un dibujo 3D ASCII genérico para simular la perspectiva de un paralelepípedo
+        
+        return `
+           .----.
+          /   /|
+         '----' |
+         |  |   |
+         |  |  .
+         | /  / 
+         '----'
+   
+   (Simulación de Perspectiva 3D)
+   `;
+    }
+
+    // ===============================================
+    // FUNCIÓN PRINCIPAL
+    // ===============================================
+
+    function calcularVolumen() {
+        // --- CÁLCULO DEL VOLUMEN ---
+        const P1 = obtenerPunto('P1');
+        const P2 = obtenerPunto('P2');
+        const P3 = obtenerPunto('P3');
+        const P4 = obtenerPunto('P4');
+
+        // Los vectores son las diferencias entre los puntos y el origen (P1)
+        const vector_a = [P2.x - P1.x, P2.y - P1.y, P2.z - P1.z];
+        const vector_b = [P3.x - P1.x, P3.y - P1.y, P3.z - P1.z];
+        const vector_c = [P4.x - P1.x, P4.y - P1.y, P4.z - P1.z];
+
+        const triple_producto = calcularTripleProductoEscalar(vector_a, vector_b, vector_c);
+        const volumen = Math.abs(triple_producto); // El volumen es el valor absoluto
+
+        // --- MOSTRAR RESULTADOS Y GRÁFICO 3D (Vectores) ---
+        document.getElementById('resultado_det').textContent = triple_producto.toFixed(2);
+        document.getElementById('resultado_volumen').textContent = volumen.toFixed(2);
+        
+        const graficoHTML = dibujarVerticesTextual(P1, P2, P3, P4, vector_a, vector_b, vector_c);
+        document.getElementById('grafico_textual').textContent = graficoHTML;
+
+        // --- GRAFICAR EL CUBO EN PERSPECTIVA ---
+        const graficoCubo = dibujarCuboPerspectiva();
+        document.getElementById('grafico_cubo').textContent = graficoCubo;
+    }
+
+    // Ejecutar al cargar
+    window.onload = calcularVolumen;
+</script>
+</body>
+</html>
